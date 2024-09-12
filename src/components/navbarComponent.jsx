@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import allActions from "../store/action";
 import "bootstrap/dist/js/bootstrap.bundle.min"; // Import Bootstrap JS
 import $ from "jquery"; // Import jQuery
+import { useSelector, useDispatch } from "react-redux";
+import { fetchMoviesBySearch } from "../store/moviesActions";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function NavbarComponent() {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [dataGenre, setDataGenre] = useState(null);
 
@@ -12,11 +15,20 @@ export default function NavbarComponent() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    dispatch(allActions.changeSearch(searchQuery));
+    let tamp = searchQuery.replace(/\s/g, "+");
+
+    console.log(tamp, "INI YG DISPATCH");
+    dispatch(fetchMoviesBySearch(searchQuery));
+    navigate(`/search/${tamp}`);
   };
 
   const handleInputChange = (e) => {
-    setSearchQuery(e.target.value);
+    let tamp = e.target.value;
+    // console.log(tamp, " TAMP");
+    // tamp = tamp.replace(/\s/g, "+");
+    // console.log(tamp, "====> ini hasil regex");
+    setSearchQuery(tamp);
+    console.log(searchQuery);
   };
 
   useEffect(() => {
@@ -64,7 +76,7 @@ export default function NavbarComponent() {
         style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 10 }}
       >
         <div className="container-fluid">
-          <a className="navbar-brand text-white" href="#">
+          <a className="navbar-brand text-warning" href="#">
             Navbar
           </a>
           <button
@@ -82,7 +94,7 @@ export default function NavbarComponent() {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <a
-                  className="nav-link text-white active"
+                  className="nav-link text-warning active"
                   aria-current="page"
                   href="/"
                 >
@@ -91,7 +103,7 @@ export default function NavbarComponent() {
               </li>
               <li className="nav-item dropdown" data-bs-theme="dark">
                 <a
-                  className="nav-link text-white dropdown-toggle"
+                  className="nav-link text-warning dropdown-toggle"
                   href="#"
                   id="navbarDropdown"
                   role="button"
@@ -110,7 +122,11 @@ export default function NavbarComponent() {
                 </ul>
               </li>
             </ul>
-            <form className="d-flex" onSubmit={handleSearch}>
+            <form
+              className="d-flex"
+              onSubmit={handleSearch}
+              // onkeydown="return event.key != 'Enter';"
+            >
               <input
                 className="form-control me-2"
                 type="search"
@@ -119,9 +135,9 @@ export default function NavbarComponent() {
                 value={searchQuery}
                 onChange={handleInputChange}
               />
-              <button className="btn btn-outline-success" type="submit">
+              <Link className="btn btn-warning" to={`/search/${searchQuery}`}>
                 Search
-              </button>
+              </Link>
             </form>
           </div>
         </div>

@@ -1,73 +1,41 @@
-import CardComponentTemp from "../../components/cardComponenttemp";
-import CarouselComponent from "../../components/carouselComponent";
 import { useSelector, useDispatch } from "react-redux";
-import { CardComponent } from "../../components";
-import { useState, useEffect } from "react";
-
+import { useEffect } from "react";
+import { fetchMovies } from "../../store/moviesActions";
+import CarouselComponent from "../../components/carouselComponent";
+import SliderComponent from "../../components/sliderComponent";
 export default function HomePage() {
-  const username = useSelector((state) => state.username);
-
-  console.log(username, "-----------USERNAME INIIIIIIIIIII");
-
-  const [dataFilm, setDataFilm] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+  const { movies: dataFilm, loading: isLoading, error } = useSelector(
+    (state) => state.movies
+  );
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    dispatch(fetchMovies());
+  }, [dispatch]);
 
-  const fetchData = async () => {
-    try {
-      const url =
-        "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
-      const options = {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NzZiNjJjZmQ0MTUxNWRiYjEzMzhhMzNiMDZhZjJjMSIsIm5iZiI6MTcyNTk3MTM5NS4yNTAyNjYsInN1YiI6IjY2ZTAzYTdkNjAwNjA4NmYyMDZjY2FlZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T92oZSZ8slGLO-uxrNwvVqhQG7V204K3E4WC5mqSPp0",
-        },
-      };
-      const response = await fetch(url, options);
-      const resultData = await response.json();
-      const moviesWithImages = await Promise.all(
-        resultData.results.map(async (movie) => {
-          // Fetch movie images for each movie using its movie ID
-          const imagesResponse = await fetch(
-            `https://api.themoviedb.org/3/movie/${movie.id}/images`,
-            options
-          );
-          const imagesData = await imagesResponse.json();
+  if (isLoading) {
+    return (
+      <div className="d-flex justify-content-center">
+        <div className="spinner-border" role="status"></div>
+      </div>
+    );
+  }
 
-          // Combine the movie data with its images
-          return {
-            ...movie,
-            images: imagesData.backdrops, // You can access 'backdrops' or 'posters'
-          };
-        })
-      );
-
-      // Set the final data including images to the state
-      setDataFilm(moviesWithImages);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-      setIsLoading(false);
-    }
-  };
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <>
-      {isLoading ? (
-        <div className="d-flex justify-content-center">
-          <div className="spinner-border" role="status"></div>
-        </div>
-      ) : (
-        <>
-          <CarouselComponent film={dataFilm} />
-          <CardComponent film={dataFilm} />
-        </>
-      )}
+      {console.log(dataFilm)}
+      <CarouselComponent film={dataFilm.trending} />
+      <h1 className="text-white mt-3 mx-3">Now Playing</h1>
+      <SliderComponent film={dataFilm.nowPlaying} no={1} />
+      <h1 className="text-white mx-3">Popular</h1>
+      <SliderComponent film={dataFilm.popular} no={2} />
+      <h1 className="text-white mx-3">Upcoming</h1>
+      <SliderComponent film={dataFilm.upcoming} no={3} />
+      {/* <CardComponent film={dataFilm} /> */}
     </>
   );
 }

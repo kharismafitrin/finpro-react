@@ -34,16 +34,88 @@
       * {
         font-family: "Poppins", sans-serif;
       }
+      #root {
+        background-color: black;
+        top: 0;
+        min-height: 100vh;
+      }
       .card-text {
         position: absolute;
         top: 0;
-        color: white;
         background-color: rgba(0, 0, 0, 0.5);
         display: none;
       }
 
       .card:hover .card-text {
         display: block;
+      }
+      .carousel-item {
+        position: relative;
+      }
+
+      .carousel-content {
+        background: linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 0.8) 30%,
+          rgba(0, 0, 0, 0) 100%
+        );
+        padding: 20px;
+      }
+
+      .carousel-inner {
+        height: 100%;
+      }
+
+      .carousel-caption h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+      }
+
+      .carousel-caption .rating {
+        background-color: green;
+        padding: 0.3rem 0.6rem;
+        border-radius: 0.25rem;
+        font-size: 1.2rem;
+      }
+
+      .carousel-caption .release-date {
+        margin-right: 10px;
+      }
+
+      .carousel-caption p {
+        font-size: 1.2rem;
+        margin-top: 10px;
+      }
+
+      @media (max-width: 767px) {
+        .carousel-inner .carousel-item > div {
+          display: none;
+        }
+        .carousel-inner .carousel-item > div:first-child {
+          display: block;
+        }
+      }
+      .carousel-inner .carousel-item.active,
+      .carousel-inner .carousel-item-next,
+      .carousel-inner .carousel-item-prev {
+        display: flex;
+      }
+
+      @media (min-width: 768px) {
+        .carousel-inner .carousel-item-end.active,
+        .carousel-inner .carousel-item-next {
+          transform: translateX(25%);
+        }
+
+        .carousel-inner .carousel-item-start.active,
+        .carousel-inner .carousel-item-prev {
+          transform: translateX(-25%);
+        }
+      }
+
+      .carousel-inner .carousel-item-end,
+      .carousel-inner .carousel-item-start {
+        transform: translateX(0);
       }
     </style>
     <title>React App</title>
