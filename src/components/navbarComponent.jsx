@@ -75,9 +75,7 @@ export default function NavbarComponent() {
       style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 10 }}
     >
       <div className="container-fluid">
-        <a className="navbar-brand text-warning fw-bold" href="/">
-          KARIS
-        </a>
+        <p className="navbar-brand text-warning fw-bold my-auto">KARIS</p>
         <button
           className="navbar-toggler"
           type="button"
@@ -92,17 +90,18 @@ export default function NavbarComponent() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a
-                className="nav-link text-warning active"
-                aria-current="page"
-                href="/"
-              >
-                Home
-              </a>
+              <Link to="/" className="text-decoration-none">
+                <p
+                  className="nav-link my-auto text-warning active"
+                  aria-current="page"
+                >
+                  Home
+                </p>
+              </Link>
             </li>
             <li className="nav-item dropdown" data-bs-theme="dark">
               <p
-                className="nav-link text-warning dropdown-toggle"
+                className="nav-link my-auto text-warning dropdown-toggle"
                 id="navbarDropdown"
                 role="button"
                 aria-expanded="false"

@@ -15,7 +15,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/search/:title" element={<SearchPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />
-        <Route path="/genre/:id" element={<ByGenrePage />} />
+        <Route path="/genre/:name" element={<ByGenrePage />} />
       </Routes>
     </div>
   );
