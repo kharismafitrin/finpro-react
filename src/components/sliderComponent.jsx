@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import "./sliderComponent.css";
-import { useSelector } from "react-redux";
 import ItemCard from "./itemCardComponent";
 
 export default function SliderComponent({ film, no }) {
   useEffect(() => {
     const itemsMainDiv = document.querySelector(".MultiCarousel");
-    const itemsDiv = document.querySelector(".MultiCarousel-inner");
     let itemWidth = "";
 
     // Event listener for left and right buttons
@@ -74,7 +72,6 @@ export default function SliderComponent({ film, no }) {
       ).transform;
       const values = divStyle.match(/-?[\d\.]+/g);
       const xds = Math.abs(values[4]);
-
       if (e === 0) {
         translateXval = parseInt(xds) - parseInt(itemWidth * s);
         document.querySelector(leftBtn).classList.remove("over");

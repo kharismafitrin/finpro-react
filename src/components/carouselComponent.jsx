@@ -58,7 +58,6 @@ export default class CarouselComponent extends React.Component {
                     position: "absolute",
                     bottom: "0", // Adjust position as needed
                     left: "0",
-                    background: "rgb(2,0,36)",
                     background:
                       "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%)",
                     maxWidth: "60%",

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import React from "react";
 import ItemCard from "./itemCardComponent";
 
 export default class cardComponent extends React.Component {

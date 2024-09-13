@@ -102,6 +102,7 @@ export default function DetailPage() {
                     <img
                       src={`https://image.tmdb.org/t/p/w500${detailFilm.detail.poster_path}`}
                       className="w-100"
+                      alt="detailFilm.detail.title"
                     />
                     <div class="d-grid gap-2 mt-4">
                       <ModalComponent buttonTitle={"WATCH TRAILER"}>
@@ -172,6 +173,7 @@ export default function DetailPage() {
                         <img
                           src={`https://image.tmdb.org/t/p/w500${el.profile_path}`}
                           className="rounded-4 col-6"
+                          alt={el.name}
                         />
                         <div className="col-6">
                           <p className="mb-0 fs-6 text-warning">{el.name}</p>
@@ -193,6 +195,7 @@ export default function DetailPage() {
                       <img
                         src={`https://image.tmdb.org/t/p/w500${el.file_path}`}
                         className="w-100"
+                        alt="gambar"
                         style={{
                           width: "100%" /* Lebar mengikuti container */,
                           height:

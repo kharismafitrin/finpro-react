@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "bootstrap/dist/js/bootstrap.bundle.min"; // Import Bootstrap JS
 import $ from "jquery"; // Import jQuery
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   fetchMoviesBySearch,
   fetchMoviesByGenre,
@@ -75,8 +75,8 @@ export default function NavbarComponent() {
       style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", zIndex: 10 }}
     >
       <div className="container-fluid">
-        <a className="navbar-brand text-warning" href="/">
-          Navbar
+        <a className="navbar-brand text-warning fw-bold" href="/">
+          KARIS
         </a>
         <button
           className="navbar-toggler"
@@ -101,23 +101,23 @@ export default function NavbarComponent() {
               </a>
             </li>
             <li className="nav-item dropdown" data-bs-theme="dark">
-              <a
+              <p
                 className="nav-link text-warning dropdown-toggle"
                 id="navbarDropdown"
                 role="button"
                 aria-expanded="false"
               >
                 Movie
-              </a>
+              </p>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                 {dataGenre?.map((el) => (
                   <li key={el.id}>
-                    <a
+                    <p
                       className="dropdown-item"
                       onClick={() => handleGenreClick(el.id, el.name)}
                     >
                       {el.name}
-                    </a>
+                    </p>
                   </li>
                 ))}
               </ul>
