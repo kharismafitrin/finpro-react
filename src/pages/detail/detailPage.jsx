@@ -3,6 +3,9 @@ import CardDetail from "../../components/cardDetailComponent";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import moment from "moment";
+import ModalComponent from "../../components/modalComponent";
+import ModalContent from "../../components/modalContent";
+import { Link } from "react-router-dom";
 
 export default function DetailPage() {
   const { id } = useParams(); // Ambil id dari URL
@@ -54,8 +57,8 @@ export default function DetailPage() {
           url: `https://api.themoviedb.org/3/movie/${id}/similar`,
         },
         {
-          name: "provider",
-          url: `https://api.themoviedb.org/3/movie/${id}/watch/providers`,
+          name: "videos",
+          url: `https://api.themoviedb.org/3/movie/${id}/videos`,
         },
       ];
       const options = {
@@ -101,9 +104,15 @@ export default function DetailPage() {
                       className="w-100"
                     />
                     <div class="d-grid gap-2 mt-4">
-                      <button className="btn btn-warning" type="button">
+                      <ModalComponent buttonTitle={"WATCH TRAILER"}>
+                        <ModalContent
+                          modalTitle="Watch Videos"
+                          videos={detailFilm.videos}
+                        />
+                      </ModalComponent>
+                      {/* <button className="btn btn-warning" type="button">
                         WATCH TRAILER
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                   <div className="col-md-8">
@@ -257,25 +266,30 @@ export default function DetailPage() {
                       key={film.id}
                       className="list-group-item text-white bg-dark"
                     >
-                      <div className="row text-white">
-                        <div className="col-2">
-                          <img
-                            src={`https://image.tmdb.org/t/p/w200${film.poster_path}`}
-                            alt={film.title}
-                            className="img-fluid"
-                            // style={{ maxWidth: "100px", maxHeight: "150px" }}
-                          />
+                      <Link
+                        to={`/detail/${film.id}`}
+                        className="text-decoration-none"
+                      >
+                        <div className="row text-white">
+                          <div className="col-2">
+                            <img
+                              src={`https://image.tmdb.org/t/p/w200${film.poster_path}`}
+                              alt={film.title}
+                              className="img-fluid"
+                              // style={{ maxWidth: "100px", maxHeight: "150px" }}
+                            />
+                          </div>
+                          <div className="col-10">
+                            <h5 className="mb-1 text-warning text-break">
+                              <strong>{film.title}</strong>
+                              {moment(film.release_date).format("(YYYY)")}
+                            </h5>
+                            <p className="mb-0 text-white">
+                              {film.vote_average}/10
+                            </p>
+                          </div>
                         </div>
-                        <div className="col-10">
-                          <h5 className="mb-1 text-warning text-break">
-                            <strong>{film.title}</strong>
-                            {moment(film.release_date).format("(YYYY)")}
-                          </h5>
-                          <p className="mb-0 text-white">
-                            {film.vote_average.toFixed(1)}/10
-                          </p>
-                        </div>
-                      </div>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -289,25 +303,30 @@ export default function DetailPage() {
                       key={film.id}
                       className="list-group-item text-white bg-dark"
                     >
-                      <div className="row text-white">
-                        <div className="col-2">
-                          <img
-                            src={`https://image.tmdb.org/t/p/w200${film.poster_path}`}
-                            alt={film.title}
-                            className="img-fluid"
-                            // style={{ maxWidth: "100px", maxHeight: "150px" }}
-                          />
+                      <Link
+                        to={`/detail/${film.id}`}
+                        className="text-decoration-none"
+                      >
+                        <div className="row text-white">
+                          <div className="col-2">
+                            <img
+                              src={`https://image.tmdb.org/t/p/w200${film.poster_path}`}
+                              alt={film.title}
+                              className="img-fluid"
+                              // style={{ maxWidth: "100px", maxHeight: "150px" }}
+                            />
+                          </div>
+                          <div className="col-10">
+                            <h5 className="mb-1 text-warning text-break">
+                              <strong>{film.title}</strong>
+                              {moment(film.release_date).format("(YYYY)")}
+                            </h5>
+                            <p className="mb-0 text-white">
+                              {film.vote_average}/10
+                            </p>
+                          </div>
                         </div>
-                        <div className="col-10">
-                          <h5 className="mb-1 text-warning text-break">
-                            <strong>{film.title}</strong>
-                            {moment(film.release_date).format("(YYYY)")}
-                          </h5>
-                          <p className="mb-0 text-white">
-                            {film.vote_average}/10
-                          </p>
-                        </div>
-                      </div>
+                      </Link>
                     </li>
                   ))}
                 </ul>

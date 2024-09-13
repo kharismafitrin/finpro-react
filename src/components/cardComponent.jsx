@@ -7,8 +7,6 @@ export default class cardComponent extends React.Component {
     return (
       <>
         <div className="row px-2 py-3">
-          {/* {console.log(this.props.film, "ini PROPPSSS")} */}
-
           {this.props.film.map((el) => (
             <div className="col-6 col-sm-4 col-md-3 mx-auto mb-3" key={el.id}>
               <ItemCard film={el} />

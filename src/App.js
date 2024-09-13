@@ -7,7 +7,7 @@ import Homepage from "./pages/homepage/homepage";
 import DetailPage from "./pages/detail/detailPage";
 import { NavbarComponent } from "./components";
 import SearchPage from "./pages/Searchpage/searchPage";
-
+import ByGenrePage from "./pages/byGenrePage/byGenrePage";
 function App() {
   return (
     <div className="App">
@@ -16,6 +16,7 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/search/:title" element={<SearchPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path="/genre/:id" element={<ByGenrePage />} />
       </Routes>
     </div>
   );

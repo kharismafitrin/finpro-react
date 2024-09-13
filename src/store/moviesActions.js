@@ -1,6 +1,5 @@
 export const FETCH_MOVIES_REQUEST = "FETCH_MOVIES_REQUEST";
 export const FETCH_MOVIES_SUCCESS = "FETCH_MOVIES_SUCCESS";
-export const FETCH_MOVIES_SEARCH = "FETCH_MOVIES_SEARCH";
 export const FETCH_MOVIES_FAILURE = "FETCH_MOVIES_FAILURE";
 
 const fetchMoviesRequest = () => ({
@@ -8,7 +7,11 @@ const fetchMoviesRequest = () => ({
 });
 
 const fetchMoviesSearch = () => ({
-  type: FETCH_MOVIES_SEARCH,
+  type: FETCH_MOVIES_REQUEST,
+});
+
+const fetchMoviesGenre = () => ({
+  type: FETCH_MOVIES_REQUEST,
 });
 
 const fetchMoviesSuccess = (movies) => ({
@@ -115,6 +118,42 @@ export const fetchMoviesBySearch = (search) => {
     dispatch(fetchMoviesSearch());
     try {
       const url = `https://api.themoviedb.org/3/search/movie?&query=${search}`;
+
+      const options = {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          Authorization:
+            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NzZiNjJjZmQ0MTUxNWRiYjEzMzhhMzNiMDZhZjJjMSIsIm5iZiI6MTcyNTk3MTM5NS4yNTAyNjYsInN1YiI6IjY2ZTAzYTdkNjAwNjA4NmYyMDZjY2FlZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T92oZSZ8slGLO-uxrNwvVqhQG7V204K3E4WC5mqSPp0",
+        },
+      };
+      const response = await fetch(url, options);
+      const resultData = await response.json();
+      const moviesWithImages = await Promise.all(
+        resultData.results.map(async (movie) => {
+          const imagesResponse = await fetch(
+            `https://api.themoviedb.org/3/movie/${movie.id}/images`,
+            options
+          );
+          const imagesData = await imagesResponse.json();
+          return {
+            ...movie,
+            images: imagesData.backdrops,
+          };
+        })
+      );
+      dispatch(fetchMoviesSuccess(moviesWithImages));
+    } catch (error) {
+      dispatch(fetchMoviesFailure(error.message));
+    }
+  };
+};
+
+export const fetchMoviesByGenre = (genre) => {
+  return async (dispatch) => {
+    dispatch(fetchMoviesGenre());
+    try {
+      const url = `https://api.themoviedb.org/3/discover/movie?with_genres=${genre}`;
 
       const options = {
         method: "GET",
