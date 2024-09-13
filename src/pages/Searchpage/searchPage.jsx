@@ -1,5 +1,7 @@
 import CardComponent from "../../components/cardComponent";
 import { useSelector } from "react-redux";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 export default function SearchPage() {
   const { movies: dataFilm, loading: isLoading, error } = useSelector(
@@ -8,9 +10,9 @@ export default function SearchPage() {
 
   if (isLoading) {
     return (
-      <div className="d-flex justify-content-center">
-        <div className="spinner-border" role="status"></div>
-      </div>
+      <SkeletonTheme baseColor="#202020" highlightColor="#fcfcfc">
+        <Skeleton count={5} height={300} />
+      </SkeletonTheme>
     );
   }
 
@@ -21,7 +23,7 @@ export default function SearchPage() {
     <>
       <div className="p-4">
         <h5 className="text-white pt-5 px-3">Search Result:</h5>
-        <CardComponent film={dataFilm} />
+        <CardComponent film={dataFilm.results} />
       </div>
     </>
   );

@@ -2,10 +2,12 @@ import {
   FETCH_MOVIES_REQUEST,
   FETCH_MOVIES_SUCCESS,
   FETCH_MOVIES_FAILURE,
+  FETCH_MOVIES_GENRE_REQUEST,
+  FETCH_MOVIES_SEARCH_REQUEST,
 } from "./moviesActions";
 
 const initialState = {
-  loading: false,
+  loading: true,
   movies: [],
   search: "",
   error: "",
@@ -14,6 +16,8 @@ const initialState = {
 const moviesReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_MOVIES_REQUEST:
+    case FETCH_MOVIES_SEARCH_REQUEST:
+    case FETCH_MOVIES_GENRE_REQUEST:
       return {
         ...state,
         loading: true,

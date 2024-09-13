@@ -1,20 +1,22 @@
 export const FETCH_MOVIES_REQUEST = "FETCH_MOVIES_REQUEST";
 export const FETCH_MOVIES_SUCCESS = "FETCH_MOVIES_SUCCESS";
 export const FETCH_MOVIES_FAILURE = "FETCH_MOVIES_FAILURE";
+export const FETCH_MOVIES_SEARCH_REQUEST = "FETCH_MOVIES_SEARCH_REQUEST";
+export const FETCH_MOVIES_GENRE_REQUEST = "FETCH_MOVIES_GENRE_REQUEST";
 
-const apiKey = process.env.REACT_APP_API_KEY;
 const apiUrl = process.env.REACT_APP_API_URL;
+const apiKey = `Bearer ${process.env.REACT_APP_API_KEY}`;
 
 const fetchMoviesRequest = () => ({
   type: FETCH_MOVIES_REQUEST,
 });
 
 const fetchMoviesSearch = () => ({
-  type: FETCH_MOVIES_REQUEST,
+  type: FETCH_MOVIES_SEARCH_REQUEST,
 });
 
 const fetchMoviesGenre = () => ({
-  type: FETCH_MOVIES_REQUEST,
+  type: FETCH_MOVIES_GENRE_REQUEST,
 });
 
 const fetchMoviesSuccess = (movies) => ({
@@ -28,8 +30,6 @@ const fetchMoviesFailure = (error) => ({
 });
 
 export const fetchMovies = () => {
-  console.log(apiUrl);
-  console.log(apiKey);
   return async (dispatch) => {
     dispatch(fetchMoviesRequest());
     try {

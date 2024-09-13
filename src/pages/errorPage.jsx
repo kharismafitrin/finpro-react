@@ -4,7 +4,7 @@ export default function ErrorPage() {
     <div className="d-flex align-items-center justify-content-center vh-100">
       <div className="text-center">
         <h1 className="display-1 fw-bold text-white">404</h1>
-        <p className="fs-3">
+        <p className="fs-3 text-white">
           <span className="text-danger">Opps!</span> Page not found.
         </p>
         <p className="lead text-white">

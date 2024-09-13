@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import {
   fetchMoviesBySearch,
   fetchMoviesByGenre,
+  fetchMovies,
 } from "../store/moviesActions";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -20,11 +21,17 @@ export default function NavbarComponent() {
     let tamp = searchQuery.replace(/\s/g, "+");
     dispatch(fetchMoviesBySearch(searchQuery));
     navigate(`/search/${tamp}`);
+    setSearchQuery(""); // Kosongkan input form setelah submit
   };
 
   const handleGenreClick = (id, name) => {
     dispatch(fetchMoviesByGenre(id));
     navigate(`/genre/${name}`);
+  };
+
+  const handleHomeClick = () => {
+    dispatch(fetchMovies());
+    navigate(`/`);
   };
 
   const handleInputChange = (e) => {
@@ -57,7 +64,7 @@ export default function NavbarComponent() {
         method: "GET",
         headers: {
           accept: "application/json",
-          Authorization: process.env.REACT_APP_API_KEY,
+          Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
         },
       };
       const response = await fetch(url, options);
@@ -89,7 +96,11 @@ export default function NavbarComponent() {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link to="/" className="text-decoration-none">
+              <Link
+                to="/"
+                onClick={handleHomeClick}
+                className="text-decoration-none"
+              >
                 <p
                   className="nav-link my-auto text-warning active"
                   aria-current="page"
@@ -130,9 +141,9 @@ export default function NavbarComponent() {
               value={searchQuery}
               onChange={handleInputChange}
             />
-            <Link className="btn btn-warning" to={`/search/${searchQuery}`}>
+            <button className="btn btn-warning" type="submit">
               Search
-            </Link>
+            </button>
           </form>
         </div>
       </div>

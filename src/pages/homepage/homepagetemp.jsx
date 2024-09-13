@@ -1,13 +1,14 @@
 import CardComponentTemp from "../../components/cardComponenttemp";
 import CarouselComponent from "../../components/carouselComponent";
-import { useSelector, useDispatch } from "react-redux";
-import { CardComponent } from "../../components";
+// import { useSelector, useDispatch } from "react-redux";
+// import { CardComponent } from "../../components";
+import { lazy } from "react";
 import { useState, useEffect } from "react";
 
 export default function HomePageTemp() {
-  const username = useSelector((state) => state.username);
+  // const username = useSelector((state) => state.username);
 
-  console.log(username, "-----------USERNAME INIIIIIIIIIII");
+  // console.log(username, "-----------USERNAME INIIIIIIIIIII");
 
   const [dataFilm, setDataFilm] = useState(null);
   const [isLoading, setIsLoading] = useState(true);

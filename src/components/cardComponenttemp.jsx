@@ -6,7 +6,7 @@ export default class cardComponentTemp extends React.Component {
     return (
       <>
         <div className="row row-cols-5 m-4">
-          {console.log(this.props.film, "ini PROPPSSS")}
+          {/* {console.log(this.props.film, "ini PROPPSSS")} */}
 
           {this.props.film.map((el) => (
             <div className="col-6 col-sm-4 col-md-3 col-lg-2" key={el.id}>

@@ -1,10 +1,23 @@
 import { useState } from "react";
 
 export default function ModalContent({ modalTitle, videos }) {
-  // Cari video dengan type 'Trailer', jika tidak ada pakai video pertama
   const trailerVideo =
-    videos.results.find((video) => video.type === "Trailer") ||
-    videos.results[0];
+    (videos &&
+      Array.isArray(videos.results) &&
+      videos.results.find((video) => video.type === "Trailer")) ||
+    (videos && Array.isArray(videos.results) && videos.results[0]);
+
+  const [currentVideo, setCurrentVideo] = useState(trailerVideo || {});
+
+  const isValidVideos =
+    videos && Array.isArray(videos.results) && videos.results.length > 0;
+  if (!isValidVideos) {
+    return <div>No videos available</div>;
+  }
+
+  if (!trailerVideo || !trailerVideo.key) {
+    return <div>No trailer video available</div>;
+  }
 
   const truncateText = (text, wordLimit) => {
     const words = text.split(" ");
@@ -12,8 +25,6 @@ export default function ModalContent({ modalTitle, videos }) {
       ? words.slice(0, wordLimit).join(" ") + "..."
       : text;
   };
-  // State untuk video yang sedang diputar
-  const [currentVideo, setCurrentVideo] = useState(trailerVideo);
 
   return (
     <div className="modal-content bg-dark text-white">
@@ -37,7 +48,7 @@ export default function ModalContent({ modalTitle, videos }) {
                 src={`https://www.youtube.com/embed/${currentVideo.key}?autoplay=1`}
                 title={currentVideo.name}
                 allowFullScreen
-                style={{ width: "100%", height: "100%" }} // memastikan iframe memenuhi kolom
+                style={{ width: "100%", height: "100%" }}
               ></iframe>
             </div>
             <h3 className="text-warning">{currentVideo.name}</h3>
@@ -51,19 +62,18 @@ export default function ModalContent({ modalTitle, videos }) {
           <div className="col-md-5">
             <div
               style={{
-                maxHeight: "400px", // Set batas tinggi untuk scroll
+                maxHeight: "400px",
                 overflowY: "auto",
               }}
             >
               {videos.results.map((video) => (
-                <div class="bg-dark card">
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item bg-dark">
+                <div key={video.id} className="bg-dark card">
+                  <ul className="list-group list-group-flush">
+                    <li className="list-group-item bg-dark">
                       <div
-                        key={video.id}
-                        className="d-flex mb-2"
-                        onClick={() => setCurrentVideo(video)} // Ganti video yang diputar saat di-klik
+                        onClick={() => setCurrentVideo(video)}
                         style={{ cursor: "pointer" }}
+                        className="d-flex mb-2"
                       >
                         <img
                           src={`https://img.youtube.com/vi/${video.key}/0.jpg`}
