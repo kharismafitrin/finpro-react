@@ -27,7 +27,7 @@ export default function HomePage() {
 
   return (
     <>
-      {console.log(dataFilm, "INI YG DI HOMEPAGE")}
+      {/* {console.log(dataFilm, "INI YG DI HOMEPAGE")} */}
       <CarouselComponent film={dataFilm.trending} />
       <h1 className="text-white mt-3 mx-3">Now Playing</h1>
       <SliderComponent film={dataFilm.nowPlaying} no={1} />

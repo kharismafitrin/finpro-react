@@ -26,47 +26,46 @@ export default function DetailPage() {
       const urlAll = [
         {
           name: "detail",
-          url: `https://api.themoviedb.org/3/movie/${id}`,
+          url: `${process.env.REACT_APP_API_URL}/movie/${id}`,
         },
         // {
         //   name: "genres",
-        //   url: `https://api.themoviedb.org/3/movie/${id}/genres`,
+        //   url: `${process.env.REACT_APP_API_URL}/movie/${id}/genres`,
         // },
         {
           name: "credit",
-          url: `https://api.themoviedb.org/3/movie/${id}/credits`,
+          url: `${process.env.REACT_APP_API_URL}/movie/${id}/credits`,
         },
         {
           name: "images",
-          url: `https://api.themoviedb.org/3/movie/${id}/images`,
+          url: `${process.env.REACT_APP_API_URL}/movie/${id}/images`,
         },
         {
           name: "keywords",
-          url: `https://api.themoviedb.org/3/movie/${id}/keywords`,
+          url: `${process.env.REACT_APP_API_URL}/movie/${id}/keywords`,
         },
         {
           name: "rec",
-          url: `https://api.themoviedb.org/3/movie/${id}/recommendations`,
+          url: `${process.env.REACT_APP_API_URL}/movie/${id}/recommendations`,
         },
         {
           name: "review",
-          url: `https://api.themoviedb.org/3/movie/${id}/reviews`,
+          url: `${process.env.REACT_APP_API_URL}/movie/${id}/reviews`,
         },
         {
           name: "similar",
-          url: `https://api.themoviedb.org/3/movie/${id}/similar`,
+          url: `${process.env.REACT_APP_API_URL}/movie/${id}/similar`,
         },
         {
           name: "videos",
-          url: `https://api.themoviedb.org/3/movie/${id}/videos`,
+          url: `${process.env.REACT_APP_API_URL}/movie/${id}/videos`,
         },
       ];
       const options = {
         method: "GET",
         headers: {
           accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NzZiNjJjZmQ0MTUxNWRiYjEzMzhhMzNiMDZhZjJjMSIsIm5iZiI6MTcyNTk3MTM5NS4yNTAyNjYsInN1YiI6IjY2ZTAzYTdkNjAwNjA4NmYyMDZjY2FlZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T92oZSZ8slGLO-uxrNwvVqhQG7V204K3E4WC5mqSPp0",
+          Authorization: process.env.REACT_APP_API_KEY,
         },
       };
 

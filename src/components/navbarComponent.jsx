@@ -52,13 +52,12 @@ export default function NavbarComponent() {
 
   const fetchData = async () => {
     try {
-      const url = "https://api.themoviedb.org/3/genre/movie/list?language=en";
+      const url = `${process.env.REACT_APP_API_URL}/genre/movie/list?language=en`;
       const options = {
         method: "GET",
         headers: {
           accept: "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NzZiNjJjZmQ0MTUxNWRiYjEzMzhhMzNiMDZhZjJjMSIsIm5iZiI6MTcyNTk3MTM5NS4yNTAyNjYsInN1YiI6IjY2ZTAzYTdkNjAwNjA4NmYyMDZjY2FlZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.T92oZSZ8slGLO-uxrNwvVqhQG7V204K3E4WC5mqSPp0",
+          Authorization: process.env.REACT_APP_API_KEY,
         },
       };
       const response = await fetch(url, options);

@@ -7,6 +7,7 @@ import DetailPage from "./pages/detail/detailPage";
 import { NavbarComponent } from "./components";
 import SearchPage from "./pages/Searchpage/searchPage";
 import ByGenrePage from "./pages/byGenrePage/byGenrePage";
+import ErrorPage from "./pages/errorPage";
 function App() {
   return (
     <div className="App">
@@ -16,6 +17,7 @@ function App() {
         <Route path="/search/:title" element={<SearchPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />
         <Route path="/genre/:name" element={<ByGenrePage />} />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>
   );
