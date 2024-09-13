@@ -70,7 +70,7 @@ export default function SliderComponent({ film, no }) {
       const divStyle = window.getComputedStyle(
         el.querySelector(".MultiCarousel-inner")
       ).transform;
-      const values = divStyle.match(/-?[\d\.]+/g);
+      const values = divStyle.match(/-?[\d.]+/g);
       const xds = Math.abs(values[4]);
       if (e === 0) {
         translateXval = parseInt(xds) - parseInt(itemWidth * s);
