@@ -2,7 +2,7 @@ import CardComponentTemp from "../../components/cardComponenttemp";
 import CarouselComponent from "../../components/carouselComponent";
 // import { useSelector, useDispatch } from "react-redux";
 // import { CardComponent } from "../../components";
-import { lazy } from "react";
+// import { lazy } from "react";
 import { useState, useEffect } from "react";
 
 export default function HomePageTemp() {

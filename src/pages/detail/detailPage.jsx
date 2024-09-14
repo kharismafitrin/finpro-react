@@ -83,7 +83,7 @@ export default function DetailPage() {
 
       // Combine the array of objects into a single object
       const combinedData = Object.assign({}, ...movieData);
-      console.log(combinedData);
+      // console.log(combinedData);
       setDetailFilm(combinedData);
       setLoading(false);
     } catch (error) {

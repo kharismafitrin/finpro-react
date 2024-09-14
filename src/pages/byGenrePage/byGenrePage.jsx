@@ -6,7 +6,7 @@ import "react-loading-skeleton/dist/skeleton.css"; // Import CSS untuk styling s
 
 export default function ByGenrePage() {
   const { name } = useParams();
-  console.log(name);
+  // console.log(name);
 
   const {
     movies: dataFilm,
@@ -15,7 +15,7 @@ export default function ByGenrePage() {
     error,
   } = useSelector((state) => state.movies);
 
-  console.log(id);
+  // console.log(id);
 
   if (isLoading) {
     return (
