@@ -119,6 +119,7 @@ export default function DetailPage() {
                       <img
                         src={`https://image.tmdb.org/t/p/w500${detailFilm.detail.poster_path}`}
                         className="w-100"
+                        alt={detailFilm.detail.title}
                       />
                       <div class="d-grid gap-2 mt-4">
                         <ModalComponent buttonTitle={"WATCH TRAILER"}>
